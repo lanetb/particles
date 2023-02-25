@@ -52,15 +52,19 @@ class Particle{
         if (distance < mouse.radius + this.size){
             if (mouse.x < this.x && this.x < canvas.width - this.size * 10){
                 this.x += 10;
+                this.directionX = -this.directionX;
             }
             if (mouse.x > this.x && this.x > this.size * 10){
                 this.x -= 10;
+                this.directionX = -this.directionX;
             }
             if(mouse.y < this.y && this.y < canvas.height - this.size * 10){
                 this.y += 10;
+                this.directionY = -this.directionY;
             }
             if(mouse.y > this.y && this.y > this.size * 10){
                 this.y -= 10;
+                this.directionY = -this.directionY;
             }
         }
         this.x += this.directionX;
@@ -71,15 +75,15 @@ class Particle{
 
 function init(){
     particleArray = [];
-    let numberOfParticles = (canvas.height * canvas.width) / 7000;
+    let numberOfParticles = (canvas.height * canvas.width) / 6500;
     for (let i = 0; i < numberOfParticles; i++){
-        let size = (Math.random() * 5) + 1;
+        let size = (Math.random() * 3) + 2;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) 
         + size * 2);
         let y = (Math.random() * ((innerHeight - size * 2) - (size * 2))
         + size * 2);
-        let directionX = (Math.random() * 5) - 2.5;
-        let directionY = (Math.random() * 5) - 2.5;
+        let directionX = (Math.random() * 2.5) - 1.25;
+        let directionY = (Math.random() * 2.5) - 1.25;
         let color = '#ffffff';
 
         particleArray.push(new Particle(x, y, directionX, directionY, size, color));
@@ -94,11 +98,11 @@ function connect(){
             * (particleArray[a].x - particleArray[b].x))
             + ((particleArray[a].y - particleArray[b].y)
             * (particleArray[a].y - particleArray[b].y));
-            if (distance < (canvas.width/12) * (canvas.height/12)){
-                opac = 1 - (distance/20000);
+            if (distance < (canvas.width/6) * (canvas.height/6) + 20000){
+                opac = 1 - (distance/15000);
                 ctx.strokeStyle = 'rgba(255,255,255,' + opac + ')';
                 ctx.lineWidth = 1;
-                ctx.setLineDash([10, 5]);
+                ctx.setLineDash([5, 5]);
                 ctx.beginPath();
                 ctx.moveTo(particleArray[a].x, particleArray[a].y);
                 ctx.lineTo(particleArray[b].x, particleArray[b].y);
