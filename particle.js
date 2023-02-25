@@ -10,7 +10,7 @@ let particleArray;
 let mouse = {
     x: null,
     y: null,
-    radius: (canvas.height/120) * (canvas.width/120)
+    radius: (canvas.height/160) * (canvas.width/160)
 }
 
 window.addEventListener('mousemove',
@@ -71,7 +71,7 @@ class Particle{
 
 function init(){
     particleArray = [];
-    let numberOfParticles = (canvas.height * canvas.width) / 9000;
+    let numberOfParticles = (canvas.height * canvas.width) / 7000;
     for (let i = 0; i < numberOfParticles; i++){
         let size = (Math.random() * 5) + 1;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) 
@@ -94,7 +94,7 @@ function connect(){
             * (particleArray[a].x - particleArray[b].x))
             + ((particleArray[a].y - particleArray[b].y)
             * (particleArray[a].y - particleArray[b].y));
-            if (distance < (canvas.width/10) * (canvas.height/10)){
+            if (distance < (canvas.width/12) * (canvas.height/12)){
                 opac = 1 - (distance/20000);
                 ctx.strokeStyle = 'rgba(255,255,255,' + opac + ')';
                 ctx.lineWidth = 1;
