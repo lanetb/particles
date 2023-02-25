@@ -71,7 +71,7 @@ class Particle{
 
 function init(){
     particleArray = [];
-    let numberOfParticles = (canvas.height * canvas.width) / 9000;
+    let numberOfParticles = (canvas.height * canvas.width) / 18000;
     for (let i = 0; i < numberOfParticles; i++){
         let size = (Math.random() * 5) + 1;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) 
@@ -89,7 +89,7 @@ function init(){
 function connect(){
     for (let a = 0; a < particleArray.length; a++){
         for (let b = a; b < particleArray.length; b++){
-            let distance = ((particleArray[a].x - particleArray[b])
+            let distance = ((particleArray[a].x - particleArray[b].x)
             * (particleArray[a].x - particleArray[b].x))
             + ((particleArray[a].y - particleArray[b].y)
             * (particleArray[a].y - particleArray[b].y));
