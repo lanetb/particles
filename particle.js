@@ -47,7 +47,7 @@ class Particle{
 
         let dx = mouse.x - this.x;
         let dy = mouse.y - this.y;
-        let distance = Math.sqrt(dx ** 2 + dy ** 2);
+        let distance = Math.sqrt(dx*dx + dy*dy);
         if (distance < mouse.radius + this.size){
             if (mouse.x < this.x && this.x < canvas.width - this.size * 10){
                 this.x += 10;
@@ -85,6 +85,25 @@ function init(){
     }
 }
 
+function connect(){
+    for (let a = 0; a < particleArray.length; a++){
+        for (let b = a; b < particleArray.length; b++){
+            let distance = ((particleArray[a].x - particleArray[b])
+            * (particleArray[a].x - particleArray[b].x)
+            + (particleArray[a].y - particleArray[b].y)
+            * (particleArray[a].y - particleArray[b].y));
+            if (distance < (canvas.width/7 * canvas.height/7)){
+                ctx.strokeStyle = 'rgba(255,255,255,1)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(particleArray[a].x, particleArray[a].y);
+                ctx.lineTo(particleArray[b].x, particleArray[b].y);
+                ctx.stroke();
+            }
+        }
+    }
+}
+
 function animate(){
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, innerWidth, innerHeight);
@@ -92,14 +111,7 @@ function animate(){
     for (let i = 0; i < particleArray.length; i++){
         particleArray[i].update();
     }
-}
-
-function connect(){
-    for (let a = 0; a < particleArray.length; a++){
-        for (let b = a; b < particleArray.length; b++){
-
-        }
-    }
+    connect();
 }
 
 init();
