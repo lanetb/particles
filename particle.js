@@ -3,6 +3,8 @@ const ctx = canvas.getContext('2d');
 ctx.canvas.width = window.innerWidth;
 ctx.canvas.height = window.innerHeight;
 
+const fps = 60;
+
 // Particles
 let particleArray;
 
@@ -113,7 +115,9 @@ function connect(){
 }
 
 function animate(){
+    setTimeout(() => {
     requestAnimationFrame(animate);
+    }, 1000 / fps);
     ctx.clearRect(0, 0, innerWidth, innerHeight);
 
     for (let i = 0; i < particleArray.length; i++){
