@@ -53,19 +53,19 @@ class Particle{
         let distance = Math.sqrt(dx*dx + dy*dy);
         if (distance < mouse.radius + this.size){
             if (mouse.x < this.x && this.x < canvas.width - this.size * 10){
-                this.x += 10;
+                this.x += 5;
                 this.directionX = -this.directionX;
             }
             if (mouse.x > this.x && this.x > this.size * 10){
-                this.x -= 10;
+                this.x -= 5;
                 this.directionX = -this.directionX;
             }
             if(mouse.y < this.y && this.y < canvas.height - this.size * 10){
-                this.y += 10;
+                this.y += 5;
                 this.directionY = -this.directionY;
             }
             if(mouse.y > this.y && this.y > this.size * 10){
-                this.y -= 10;
+                this.y -= 5;
                 this.directionY = -this.directionY;
             }
         }
@@ -77,7 +77,7 @@ class Particle{
 
 function init(){
     particleArray = [];
-    let numberOfParticles = (canvas.height * canvas.width) / 6500;
+    let numberOfParticles = ((canvas.height * canvas.width) / 6500) + 10;
     for (let i = 0; i < numberOfParticles; i++){
         let size = (Math.random() * 3) + 2;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) 
