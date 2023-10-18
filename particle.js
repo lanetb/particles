@@ -10,10 +10,10 @@ const ballColor = 'rgba(249,199,94,.5)';
 const ballCol = 'rgba(249,199,94,'
 const lineDistanceModifier = 6;
 const particleType = "star";
-const starPoints = 5;
+const starPoints = 7;
 const particleSize = 5;
-const dashedLine = [5, 15] //[] for solid line
-const mouseRadius = 5;
+const dashedLine = [] //[] for solid line
+const mouseRadius = 1;
 
 // Particles
 let particleArray;
@@ -93,20 +93,20 @@ class Particle{
         let dy = mouse.y - this.y;
         let distance = Math.sqrt(dx*dx + dy*dy);
         if (distance < mouse.radius + this.size){
-            if (mouse.x < this.x && this.x < canvas.width - this.size * mouseRadius){
-                this.x += mouseRadius;
+            if (mouse.x < this.x * mouseRadius && this.x < canvas.width - this.size * mouseRadius){
+                this.x += 5;
                 this.directionX = -this.directionX;
             }
-            if (mouse.x > this.x && this.x > this.size * 10){
-                this.x -= mouseRadius;
+            if (mouse.x > this.x * mouseRadius && this.x > this.size * mouseRadius){
+                this.x -= 5;
                 this.directionX = -this.directionX;
             }
-            if(mouse.y < this.y && this.y < canvas.height - this.size * 10){
-                this.y += mouseRadius;
+            if (mouse.y < this.y * mouseRadius && this.y < canvas.height - this.size * mouseRadius){
+                this.y += 5;
                 this.directionY = -this.directionY;
             }
-            if(mouse.y > this.y && this.y > this.size * 10){
-                this.y -= mouseRadius;
+            if (mouse.y > this.y * mouseRadius && this.y > this.size * mouseRadius){
+                this.y -= 5;
                 this.directionY = -this.directionY;
             }
         }
@@ -143,7 +143,7 @@ function connect(){
             + ((particleArray[a].y - particleArray[b].y)
             * (particleArray[a].y - particleArray[b].y));
             if (distance < (canvas.width/lineDistanceModifier) * (canvas.height/lineDistanceModifier)){
-                opac = 1 - (distance/(15000-1000));
+                opac = 1 - (distance/(15000-1000)) - 0.1;
                 ctx.strokeStyle = ballCol + opac + ')';
                 ctx.lineWidth = 1;
                 ctx.setLineDash(dashedLine);
